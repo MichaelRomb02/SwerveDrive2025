@@ -5,7 +5,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.util.Constants.ConveyorConstants;
 import frc.robot.util.Constants.ElevatorConstants;
 import frc.robot.util.Constants.ArmConstants;
-
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import java.util.function.DoubleSupplier;
 
@@ -20,6 +22,8 @@ import com.revrobotics.spark.SparkLowLevel.*;
 import com.revrobotics.spark.config.*;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
+
+import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
@@ -45,8 +49,8 @@ public class ArmSubsystem extends SubsystemBase{
     
 
     // Motors
-    private SparkMax ArmMotor;
-    private SparkMax ArmRotMotor;
+    private WPI_TalonSRX ArmMotor;
+    private WPI_TalonSRX ArmRotMotor;
 
 
 
@@ -58,25 +62,19 @@ public class ArmSubsystem extends SubsystemBase{
     // Lift Subsystem Constructor
     public ArmSubsystem(){
 
-        SparkMaxConfig m_armmotorConfig;
-        SparkMaxConfig m_armrotmotorConfig;
         // Set solenoid object values
       
         
 
         // Set default state of soleno
         // Set motor object values take in CAN ID
-        ArmMotor = new SparkMax(ArmConstants.kArmMotorPort, MotorType.kBrushless);
-        m_armmotorConfig = new SparkMaxConfig();
-        ArmRotMotor = new SparkMax(ArmConstants.kArmRotMotorPort, MotorType.kBrushless);
-        m_armrotmotorConfig = new SparkMaxConfig();
+        ArmMotor = new WPI_TalonSRX(ArmConstants.kArmMotorPort);
+        ArmRotMotor = new WPI_TalonSRX(ArmConstants.kArmRotMotorPort);
 
         // Make motor two follow motor one
        
 
         // Set motors to brake mode
-        m_armmotorConfig.idleMode(IdleMode.kBrake);
-        m_armrotmotorConfig.idleMode(IdleMode.kBrake);
         
 
     }
@@ -99,24 +97,24 @@ public class ArmSubsystem extends SubsystemBase{
 
     // Set both elevator motors to input
     public void ArmMoveU(){
-        ArmRotMotor.set(-.3); 
+        ArmRotMotor.set(ControlMode.PercentOutput, -.3); 
     }
     public void ArmMoveD(){
-        ArmRotMotor.set(.1); 
+        ArmRotMotor.set(ControlMode.PercentOutput, .3); 
     }
     public void ArmIn(){
-        ArmMotor.set(.1);
+        ArmMotor.set(ControlMode.PercentOutput, 1);
     }
     public void ArmOut(){
-        ArmMotor.set(-.1);
+        ArmMotor.set(ControlMode.PercentOutput, -1);
     }
 
     // Set both elevator motors to zero
     public void ArmRotStop(){
-      ArmRotMotor.set(0);
+      ArmRotMotor.set(ControlMode.PercentOutput, 0);
     }
     public void ArmStop(){
-        ArmMotor.set(0);
+        ArmMotor.set(ControlMode.PercentOutput, 0);
       }
 
 

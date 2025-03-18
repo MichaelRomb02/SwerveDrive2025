@@ -58,16 +58,16 @@ public final class Constants {
          */
 
                                                                // Driving Motor Ports
-        public static final int kFrontLeftDriveMotorPort = 30;  // Front Left 
-        public static final int kFrontRightDriveMotorPort = 10; // Front Right
-        public static final int kBackRightDriveMotorPort = 3;  // Back Right
-        public static final int kBackLeftDriveMotorPort = 40;   // Back Left
+        public static final int kFrontLeftDriveMotorPort = 3;  // Front Left 
+        public static final int kFrontRightDriveMotorPort = 40; // Front Right
+        public static final int kBackRightDriveMotorPort = 30;  // Back Right
+        public static final int kBackLeftDriveMotorPort = 10;   // Back Left
 
                                                                 // Turning Motor Ports
-        public static final int kFrontLeftTurningMotorPort = 31; // Front Left
-        public static final int kFrontRightTurningMotorPort = 9;// Front Right
-        public static final int kBackRightTurningMotorPort = 4;// Back Right
-        public static final int kBackLeftTurningMotorPort = 41;  // Back Left
+        public static final int kFrontLeftTurningMotorPort = 4; // Front Left
+        public static final int kFrontRightTurningMotorPort = 41;// Front Right
+        public static final int kBackRightTurningMotorPort = 31;// Back Right
+        public static final int kBackLeftTurningMotorPort = 9;  // Back Left
 
         // Encoder on NEO turning
         public static final boolean kFrontLeftTurningEncoderReversed = true;
@@ -82,10 +82,10 @@ public final class Constants {
         public static final boolean kBackRightDriveEncoderReversed = true;  //
 
         // -------> ABE <-------- //
-        public static final int kFrontLeftDriveAbsoluteEncoderPort = 33;
-        public static final int kBackLeftDriveAbsoluteEncoderPort = 44;
-        public static final int kFrontRightDriveAbsoluteEncoderPort = 22;
-        public static final int kBackRightDriveAbsoluteEncoderPort = 11;
+        public static final int kFrontLeftDriveAbsoluteEncoderPort = 44;
+        public static final int kBackLeftDriveAbsoluteEncoderPort = 11;
+        public static final int kFrontRightDriveAbsoluteEncoderPort = 33;
+        public static final int kBackRightDriveAbsoluteEncoderPort = 22;
         // -------> ABE <-------- //
 
         // Absolute encoders reversed
@@ -156,40 +156,40 @@ public final class Constants {
 
     
 
-    public static final class ShooterConstants{
+    //public static final class ShooterConstants{
 
-        public static final int kLeftShooterMotorPort = 19;
-        public static final int kRightShooterMotorPort = 17;
-        public static final int kLeftHoldMotorPort = 7;
-        public static final int kRightHoldMotorPort = 2;   
+        //public static final int kLeftShooterMotorPort = 19;
+        //public static final int kRightShooterMotorPort = 17;
+        //public static final int kLeftHoldMotorPort = 7;
+        //public static final int kRightHoldMotorPort = 2;   
 
-        public static final double kP = 0.1;
+//        public static final double kP = 0.1;
 
-    }
-     public static final class AngleConstants{
+   // }
+    // public static final class AngleConstants{
 
-        public static final int kAngleMotorPort = 18;
+      //  public static final int kAngleMotorPort = 18;
         
-        public static final double kP = 0.1;
+      //  public static final double kP = 0.1;
 
-    }
+   // }
 
-    public static final class IntakeConstants{
+    //public static final class IntakeConstants{
 
-        public static final int kIntakeMotorPort = 6;
+     //   public static final int kIntakeMotorPort = 6;
 
-    }
+    //}
 
     public static final class ArmConstants{
 
-        public static final int kArmMotorPort = 0;
-        public static final int kArmRotMotorPort = 0;
+        public static final int kArmMotorPort = 8;
+        public static final int kArmRotMotorPort = 2;
 
     }
 
     public static final class ConveyorConstants{
 
-        public static final int kConveyorMotorPort = 0;
+        public static final int kConveyorMotorPort = 7;
 
     }
 

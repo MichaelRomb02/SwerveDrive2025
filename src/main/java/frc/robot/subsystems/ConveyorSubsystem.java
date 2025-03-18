@@ -1,4 +1,4 @@
-/// FRC2106 Junkyard Dogs - Continuity Base Code - www.team2106.org
+// FRC2106 Junkyard Dogs - Continuity Base Code - www.team2106.org
 
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -7,7 +7,9 @@ import frc.robot.util.Constants.ElevatorConstants;
 import frc.robot.util.Constants.ArmConstants;
 
 import java.util.function.DoubleSupplier;
-
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkLimitSwitch;
@@ -44,7 +46,7 @@ public class ConveyorSubsystem extends SubsystemBase{
     
 
     // Motors
-    private SparkMax ConveyorMotor;
+    private WPI_TalonSRX ConveyorMotor;
 
 
 
@@ -56,21 +58,18 @@ public class ConveyorSubsystem extends SubsystemBase{
     // Lift Subsystem Constructor
     public ConveyorSubsystem(){
 
-        SparkMaxConfig m_conveyormotorConfig;
         // Set solenoid object values
       
         
 
         // Set default state of soleno
         // Set motor object values take in CAN ID
-        ConveyorMotor = new SparkMax(ConveyorConstants.kConveyorMotorPort, MotorType.kBrushless);
-        m_conveyormotorConfig = new SparkMaxConfig();
+        ConveyorMotor = new WPI_TalonSRX(ConveyorConstants.kConveyorMotorPort);
 
         // Make motor two follow motor one
        
 
         // Set motors to brake mode
-        m_conveyormotorConfig.idleMode(IdleMode.kBrake);
         
 
     }
@@ -92,16 +91,16 @@ public class ConveyorSubsystem extends SubsystemBase{
     
 
     // Set both elevator motors to input
-    public void ConveyorIn(){
-        ConveyorMotor.set(-.3); 
+    public void ConveyorForward(){
+        ConveyorMotor.set(ControlMode.PercentOutput,-1); 
     }
-    public void ConveyorOut(){
-        ConveyorMotor.set(.1); 
+    public void ConveyorBackward(){
+        ConveyorMotor.set(ControlMode.PercentOutput, 1); 
     }
 
     // Set both elevator motors to zero
     public void ConveyorStop(){
-      ConveyorMotor.set(0);
+      ConveyorMotor.set(ControlMode.PercentOutput, 0);
     }
 
 

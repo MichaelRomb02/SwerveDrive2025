@@ -32,7 +32,6 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.util.Constants.DriveConstants;
-import frc.robot.util.Constants.IntakeConstants;
 import frc.robot.util.Constants.ModuleConstants;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismRoot2d;
@@ -93,7 +92,7 @@ public class SwerveModule extends SubsystemBase {
     absoluteEncoder = new CANcoder(absoluteEncoderId);
     //this.absoluteEncoderOffsetRad = absoluteEncoderOffsetRad;
 
-    lastAngle = getState().angle;
+   
 
     SparkMaxConfig  drivemotorconfig = new SparkMaxConfig();
     SparkMaxConfig turnmotorconfig = new SparkMaxConfig();
@@ -116,7 +115,7 @@ public class SwerveModule extends SubsystemBase {
     // Change conversion factors for neo turning encoder - should be in radians!
     turnmotorconfig.encoder.positionConversionFactor(ModuleConstants.kTurningEncoderRot2Rad);
     turnmotorconfig.encoder.velocityConversionFactor(ModuleConstants.kTurningEncoderRPM2RadPerSec);
-
+    lastAngle = getState().angle;
 
     //-----ROBO-RIO-PID-----//
 

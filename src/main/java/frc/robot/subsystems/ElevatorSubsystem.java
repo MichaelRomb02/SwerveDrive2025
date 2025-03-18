@@ -93,7 +93,7 @@ public class ElevatorSubsystem extends SubsystemBase{
 
     // Set both elevator motors to input
     public void ElevatorU(){
-        ElevatorMotor.set(-.3); 
+        ElevatorMotor.set(-.25); 
     }
     public void ElevatorD(){
         ElevatorMotor.set(.1); 

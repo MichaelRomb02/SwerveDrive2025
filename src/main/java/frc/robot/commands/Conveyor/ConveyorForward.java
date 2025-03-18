@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ConveyorSubsystem;
 
 /** An example command that uses an example subsystem. */
-public class ConveyorOut extends Command {
+public class ConveyorForward extends Command {
 
   private ConveyorSubsystem subsystem;
   
 
-  public ConveyorOut(ConveyorSubsystem subsystem) {
+  public ConveyorForward(ConveyorSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.subsystem = subsystem;
     addRequirements(subsystem);
@@ -27,7 +27,7 @@ public class ConveyorOut extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  subsystem.ConveyorOut();
+  subsystem.ConveyorForward();
   //Timer.delay(3);
   //subsystem.stopAll();
   }

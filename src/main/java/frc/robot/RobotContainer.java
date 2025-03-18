@@ -25,13 +25,12 @@ import frc.robot.commands.Arm.ArmMoveU;
 import frc.robot.commands.Arm.ArmMoveD;
 import frc.robot.commands.Arm.ArmStop;
 import frc.robot.commands.Arm.ArmRotStop;
-import frc.robot.commands.Conveyor.ConveyorIn;
-import frc.robot.commands.Conveyor.ConveyorOut;
+import frc.robot.commands.Conveyor.ConveyorForward;
+import frc.robot.commands.Conveyor.ConveyorBackward;
 import frc.robot.commands.Conveyor.ConveyorStop;
 import frc.robot.commands.Elevator.ElevatorD;
 import frc.robot.commands.Elevator.ElevatorU;
 import frc.robot.commands.Elevator.ElevatorStop;
-
 import frc.robot.commands.swerve.SwerveJoystick;
 
 import frc.robot.commands.swerve.SwerveReset;
@@ -65,11 +64,12 @@ public class RobotContainer {
 
   // Deprecated joysticks
   //private final Joystick DriveJoystick = new Joystick(0);
- private final Joystick ShooterJoystick = new Joystick(1);
+  private final Joystick tx12 = new Joystick(0);
+  private final Joystick ShooterJoystick = new Joystick(1);
 
   // Create tx16s transmitter
- private final Joystick tx16s = new Joystick(0);
- private final CommandJoystick tx16sCOMD = new CommandJoystick(0);
+
+ private final CommandJoystick tx12COMD = new CommandJoystick(0);
 
   // Create led strips
  // private final LightStrip strips = new LightStrip(tx16s,0);
@@ -145,13 +145,12 @@ public class RobotContainer {
 
   
     swerveSubsystem.setDefaultCommand(new SwerveJoystick(swerveSubsystem,
-    () -> tx16s.getRawAxis(1), // X-Axis
-    () -> -tx16s.getRawAxis(4), // Y-Axis
-    () -> tx16s.getRawAxis(0), // R-Axis
-    () -> tx16s.getRawButton(0), // Field oriented -does nothing right now
+    () -> tx12.getRawAxis(1), // X-Axis
+    () -> -tx12.getRawAxis(3), // Y-Axis
+    () -> tx12.getRawAxis(0), // R-Axis
+    () -> tx12.getRawButton(0), // Field oriented -does nothing right now
     () -> swerveSubsystem.getHeading(), // Navx heading
-    () -> tx16s.getRawButton(4))); // Flick offset button, should be toggle!
-
+    () -> tx12.getRawButton(0))); // Flick offset button, should be toggle!
 
  //>-----------T-X-1-6-S---------<//
 
@@ -243,34 +242,33 @@ public class RobotContainer {
     //tx16sCOMD.axisGreaterThan(1, 50.0).toggleOnTrue(new ElevatorZero(elevatorSubsystem, grabberSubsystem));
 
     // Homing
-    new JoystickButton(ShooterJoystick, 1).toggleOnTrue(new ArmIn(ArmSubsystem));
-      new JoystickButton(ShooterJoystick, 1).onFalse(new ArmStop(ArmSubsystem));
+    new JoystickButton(ShooterJoystick, 8).whileTrue(new ArmIn(ArmSubsystem));
+      new JoystickButton(ShooterJoystick, 8).onFalse(new ArmStop(ArmSubsystem));
     
-    new JoystickButton(ShooterJoystick, 3).whileTrue(new ArmOut(ArmSubsystem));
-      new JoystickButton(ShooterJoystick, 3).onFalse(new ArmStop(ArmSubsystem));
+    new JoystickButton(ShooterJoystick, 7).whileTrue(new ArmOut(ArmSubsystem));
+      new JoystickButton(ShooterJoystick, 7).onFalse(new ArmStop(ArmSubsystem));
     
     new JoystickButton(ShooterJoystick, 4).whileTrue(new ArmMoveD(ArmSubsystem));
       new JoystickButton(ShooterJoystick, 4).onFalse(new ArmRotStop(ArmSubsystem));
     
-    new JoystickButton(ShooterJoystick, 2).whileTrue(new ArmMoveU(ArmSubsystem));
-      new JoystickButton(ShooterJoystick, 2 ).onFalse(new ArmRotStop(ArmSubsystem));
+    new JoystickButton(ShooterJoystick, 6).whileTrue(new ArmMoveU(ArmSubsystem));
+      new JoystickButton(ShooterJoystick, 6 ).onFalse(new ArmRotStop(ArmSubsystem));
   
 
 
 
-    new JoystickButton(ShooterJoystick, 7).whileTrue(new ConveyorIn(ConveyorSubsystem));
-    new JoystickButton(ShooterJoystick, 7).onFalse(new ConveyorStop(ConveyorSubsystem));
+    new JoystickButton(ShooterJoystick, 1).whileTrue(new ConveyorForward(ConveyorSubsystem));
+    new JoystickButton(ShooterJoystick, 1).onFalse(new ConveyorStop(ConveyorSubsystem));
     
-    new JoystickButton(ShooterJoystick, 8).whileTrue(new ConveyorOut(ConveyorSubsystem));
-    new JoystickButton(ShooterJoystick, 8).onFalse(new ConveyorStop(ConveyorSubsystem));
+    new JoystickButton(ShooterJoystick, 2).whileTrue(new ConveyorBackward(ConveyorSubsystem));
+    new JoystickButton(ShooterJoystick, 2).onFalse(new ConveyorStop(ConveyorSubsystem));
    
-    new JoystickButton(ShooterJoystick, 5).whileTrue(new ElevatorD(ElevatorSubsystem));
+    new JoystickButton(ShooterJoystick, 3).whileTrue(new ElevatorD(ElevatorSubsystem));
+    new JoystickButton(ShooterJoystick, 3).onFalse(new ElevatorStop(ElevatorSubsystem));
+   
+    new JoystickButton(ShooterJoystick, 5).whileTrue(new ElevatorU(ElevatorSubsystem));
     new JoystickButton(ShooterJoystick, 5).onFalse(new ElevatorStop(ElevatorSubsystem));
-   
-    new JoystickButton(ShooterJoystick, 6).whileTrue(new ElevatorU(ElevatorSubsystem));
-    new JoystickButton(ShooterJoystick, 6).onFalse(new ElevatorStop(ElevatorSubsystem));
 
-   
     // Apriltag
 
     // new JoystickButton(xbox, 2).onTrue(new ElevatorApriltag(elevatorSubsystem, visionSubsystem));
